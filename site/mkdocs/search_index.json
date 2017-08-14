@@ -1,0 +1,204 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome to Project XXX docs\n\n\nThis is auto generated homepage", 
+            "title": "Getting Started"
+        }, 
+        {
+            "location": "/#welcome-to-project-xxx-docs", 
+            "text": "This is auto generated homepage", 
+            "title": "Welcome to Project XXX docs"
+        }, 
+        {
+            "location": "/test/", 
+            "text": "The Apex API\n\n\nAPEX API\n provides endpoints to onboard, update, delete a project and\nretrieve project(s) information. It also provides other operations to sync\nwith github or receive github events. \n \n \nTerminologies\n \n *\n\nProject\n: A project is an API that is registered with APEX through the\nonboarding process. \n\n\nThis API has the following attributes:\n\n\n\n\n\n\n\n\nAttribute\n\n\nValue\n\n\n\n\n\n\n\n\n\n\nnamespace\n\n\ncom.yahoo.apex.parsec\n\n\n\n\n\n\nversion\n\n\n1\n\n\n\n\n\n\n\n\nResources\n\n\nProjectResponse\n\n\nPOST /projects/\n\n\nCreate/Onboard a project. \n Please refer to  \nSample\nRequest/Responses\n sections for examples.\n\n\nRequest parameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nSource\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ncreationRequest\n\n\nProjectRequest\n\n\nbody\n\n\n\n\nRequired request parameter.\n\n\n\n\n\n\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n202 Accepted\n\n\nProjectResponse\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n403 Forbidden\n\n\nResourceError\n\n\n\n\n\n\n\n\n409 Conflict\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nPUT /projects/{id}\n\n\nEdit/Modify a project. \n Please refer to  \nSample Request/Responses\n\nsections for examples.\n\n\nRequest parameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nSource\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nid\n\n\nUUID\n\n\npath\n\n\n\n\n\n\n\n\n\n\nproject\n\n\nProjectRequest\n\n\nbody\n\n\n\n\n\n\n\n\n\n\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n200 OK\n\n\nProjectResponse\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n403 Forbidden\n\n\nResourceError\n\n\n\n\n\n\n\n\n404 Not Found\n\n\nResourceError\n\n\n\n\n\n\n\n\n409 Conflict\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nGET /projects/{id}\n\n\nGet the detail of the project with the given project id. \n Please refer to\n\nSample Request/Responses\n sections for examples.\n\n\nRequest parameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nSource\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nid\n\n\nUUID\n\n\npath\n\n\n\n\n\n\n\n\n\n\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n200 OK\n\n\nProjectResponse\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n404 Not Found\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nProjectResponseList\n\n\nGET /projects\n\n\nGet all projects. \n Please refer to \nSample Request/Responses\n\nsections for examples.\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n200 OK\n\n\nProjectResponseList\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nNullResponse\n\n\nDELETE /projects/{id}\n\n\nDelete the project with the given project id. \n Please refer to \nSample\nRequest/Responses\n sections for examples.\n\n\nRequest parameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nSource\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nid\n\n\nUUID\n\n\npath\n\n\n\n\n\n\n\n\n\n\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n204 No Content\n\n\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n404 Not Found\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nPOST /projects/{id}/events\n\n\nFor github Webhook callback \n\n\nRequest parameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nSource\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nid\n\n\nUUID\n\n\npath\n\n\n\n\n\n\n\n\n\n\nevent\n\n\nPushEventRequest\n\n\nbody\n\n\n\n\n\n\n\n\n\n\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n204 No Content\n\n\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n404 Not Found\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nPOST /projects/{id}/sync\n\n\nForce Apex to sync with the project data on git. \n Please refer to \nSample\nRequest/Responses\n sections for examples.\n\n\nRequest parameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nSource\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nid\n\n\nUUID\n\n\npath\n\n\n\n\n\n\n\n\n\n\n\n\nResponses:\n\n\nExpected:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\n\n\n\n\n\n\n\n\n204 No Content\n\n\n\n\n\n\n\n\n\n\nException:\n\n\n\n\n\n\n\n\nCode\n\n\nType\n\n\nComment\n\n\n\n\n\n\n\n\n\n\n400 Bad Request\n\n\nResourceError\n\n\n\n\n\n\n\n\n401 Unauthorized\n\n\nResourceError\n\n\n\n\n\n\n\n\n404 Not Found\n\n\nResourceError\n\n\n\n\n\n\n\n\n409 Conflict\n\n\nResourceError\n\n\n\n\n\n\n\n\n500 Internal Server Error\n\n\nResourceError\n\n\n\n\n\n\n\n\n\n\nTypes\n\n\n DateTime\n\n\nDateTime string that follows ISO 8601 UTC format, e.g.2013-03-06T11:00:00Z\n\n\nDateTime\n is an alias of type \nString\n\n\n ProjectRequest\n\n\nThe request parameter used in project onboarding/creation and update.\n\n - Each and every field are required for creation (not null), and\ncan not be blank. \n - The fields are allowed to be null on update but not\nblank. If the field value is null for update, the field will be kept\nunchanged. \n - Please refer to  \nSample Request/Responses\n sections\nfor examples. \n - \nImplementation note\n: Regex is used to verify the\ninput is not blank and escape '\\' twice for rdl \n java\n\n\nProjectRequest\n is a \nStruct\n type with the following fields:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nOptions\n\n\nDescription\n\n\nNotes\n\n\n\n\n\n\n\n\n\n\nrepoUrl\n\n\nString\n\n\n\n\nThe ssh url to the repository where the RDL source and documents resides. \n Should be in the format of \ngit@git.corp.yahoo.com:${orgname}/${reponame}.git#${branchName}\n\n\n\n\n\n\n\n\nname\n\n\nString\n\n\n\n\nThe name of the api.\n\n\n\n\n\n\n\n\ncustodian\n\n\nString\n\n\n\n\nThe custodian/contact of the api, should be a \n@yahoo-inc\n address. An ilist is preferred.\n\n\n\n\n\n\n\n\ndescription\n\n\nString\n\n\n\n\nLong description of the api.\n\n\n\n\n\n\n\n\n\n\n ProjectResponse\n\n\nThe response object used in GET operation\n\n\nProjectResponse\n is a \nStruct\n type with the following fields:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nOptions\n\n\nDescription\n\n\nNotes\n\n\n\n\n\n\n\n\n\n\nid\n\n\nUUID\n\n\n\n\nSystem generated unique id.\n\n\n\n\n\n\n\n\nname\n\n\nString\n\n\n\n\nThe name of the project. As specified on project creation.\n\n\n\n\n\n\n\n\ncustodian\n\n\nString\n\n\n\n\nThe custodian of the project. As specified on project creation.\n\n\n\n\n\n\n\n\ndescription\n\n\nString\n\n\n\n\nThe description of the project. As specified on project creation.\n\n\n\n\n\n\n\n\nrepoUrl\n\n\nString\n\n\n\n\nThe repository of the project. As specified on project creation.\n\n\n\n\n\n\n\n\nrepoOrg\n\n\nString\n\n\n\n\nThe organization of the project repository, specified in \nrepoUrl\n on project creation.\n\n\n\n\n\n\n\n\nrepoName\n\n\nString\n\n\n\n\nThe name of the project repository, specified in \nrepoUrl\n on project creation.\n\n\n\n\n\n\n\n\nrepoBranch\n\n\nString\n\n\n\n\nThe branch of the project repository, specified in \nrepoUrl\n on project creation.\n\n\n\n\n\n\n\n\nrepoHeadSha\n\n\nString\n\n\n\n\nThe sha of the project repository.\n\n\n\n\n\n\n\n\ndocUrl\n\n\nString\n\n\n\n\nThe url to the document-hosting page, ex: https://git.corp.yahoo.com/pages/ApexHosting/project_cat/\n\n\n\n\n\n\n\n\nreviewUrl\n\n\nString\n\n\n\n\nThe url to the api review jive page, ex: https://yahoo.jiveon.com/thread/17141, as specified in the project config file.\n\n\n\n\n\n\n\n\nsplunkDashboardUrl\n\n\nString\n\n\n\n\nThe url to the api splunk dashboard, as specified in the project config file.\n\n\n\n\n\n\n\n\ntestHostUrl\n\n\nString\n\n\n\n\nThe test host url, as specified in the project config file.\n\n\n\n\n\n\n\n\nwebHookId\n\n\nInt64\n\n\n\n\n\n\n\n\n\n\n\n\ncreatedTime\n\n\nDateTime\n\n\n\n\nThe date time when the project is created.\n\n\n\n\n\n\n\n\nupdateTime\n\n\nDateTime\n\n\n\n\nThe date time when the project is updated.\n\n\n\n\n\n\n\n\n\n\n ProjectResponseList\n\n\nA collection of \nProjectResponse\n\n\nProjectResponseList\n is a \nStruct\n type with the following fields:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nOptions\n\n\nDescription\n\n\nNotes\n\n\n\n\n\n\n\n\n\n\nprojectResponseList\n\n\nArray\nProjectResponse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n NullResponse\n\n\nRepresents response when there is no content.\n\n\nNullResponse\n is a \nStruct\n with no specified fields\n\n\n PushEventRequest\n\n\nRepresents the github webhook payload. Currently we only need these 2 fields.\n\n ref: https://developer.github.com/v3/activity/events/types/#pushevent\n\n\nPushEventRequest\n is a \nStruct\n type with the following fields:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nOptions\n\n\nDescription\n\n\nNotes\n\n\n\n\n\n\n\n\n\n\nref\n\n\nString\n\n\n\n\n\n\n\n\n\n\n\n\nafter\n\n\nString\n\n\n\n\nthe latest SHA\n\n\n\n\n\n\n\n\n\n\nSwagger URL", 
+            "title": "test"
+        }, 
+        {
+            "location": "/test/#the-apex-api", 
+            "text": "APEX API  provides endpoints to onboard, update, delete a project and\nretrieve project(s) information. It also provides other operations to sync\nwith github or receive github events.      Terminologies    * Project : A project is an API that is registered with APEX through the\nonboarding process.   This API has the following attributes:     Attribute  Value      namespace  com.yahoo.apex.parsec    version  1", 
+            "title": "The Apex API"
+        }, 
+        {
+            "location": "/test/#resources", 
+            "text": "", 
+            "title": "Resources"
+        }, 
+        {
+            "location": "/test/#projectresponse", 
+            "text": "", 
+            "title": "ProjectResponse"
+        }, 
+        {
+            "location": "/test/#post-projects", 
+            "text": "Create/Onboard a project.   Please refer to   Sample\nRequest/Responses  sections for examples.", 
+            "title": "POST /projects/"
+        }, 
+        {
+            "location": "/test/#request-parameters", 
+            "text": "Name  Type  Source  Options  Description      creationRequest  ProjectRequest  body   Required request parameter.", 
+            "title": "Request parameters:"
+        }, 
+        {
+            "location": "/test/#responses", 
+            "text": "Expected:     Code  Type      202 Accepted  ProjectResponse     Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     403 Forbidden  ResourceError     409 Conflict  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#put-projectsid", 
+            "text": "Edit/Modify a project.   Please refer to   Sample Request/Responses \nsections for examples.", 
+            "title": "PUT /projects/{id}"
+        }, 
+        {
+            "location": "/test/#request-parameters_1", 
+            "text": "Name  Type  Source  Options  Description      id  UUID  path      project  ProjectRequest  body", 
+            "title": "Request parameters:"
+        }, 
+        {
+            "location": "/test/#responses_1", 
+            "text": "Expected:     Code  Type      200 OK  ProjectResponse     Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     403 Forbidden  ResourceError     404 Not Found  ResourceError     409 Conflict  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#get-projectsid", 
+            "text": "Get the detail of the project with the given project id.   Please refer to Sample Request/Responses  sections for examples.", 
+            "title": "GET /projects/{id}"
+        }, 
+        {
+            "location": "/test/#request-parameters_2", 
+            "text": "Name  Type  Source  Options  Description      id  UUID  path", 
+            "title": "Request parameters:"
+        }, 
+        {
+            "location": "/test/#responses_2", 
+            "text": "Expected:     Code  Type      200 OK  ProjectResponse     Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     404 Not Found  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#projectresponselist", 
+            "text": "", 
+            "title": "ProjectResponseList"
+        }, 
+        {
+            "location": "/test/#get-projects", 
+            "text": "Get all projects.   Please refer to  Sample Request/Responses \nsections for examples.", 
+            "title": "GET /projects"
+        }, 
+        {
+            "location": "/test/#responses_3", 
+            "text": "Expected:     Code  Type      200 OK  ProjectResponseList     Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#nullresponse", 
+            "text": "", 
+            "title": "NullResponse"
+        }, 
+        {
+            "location": "/test/#delete-projectsid", 
+            "text": "Delete the project with the given project id.   Please refer to  Sample\nRequest/Responses  sections for examples.", 
+            "title": "DELETE /projects/{id}"
+        }, 
+        {
+            "location": "/test/#request-parameters_3", 
+            "text": "Name  Type  Source  Options  Description      id  UUID  path", 
+            "title": "Request parameters:"
+        }, 
+        {
+            "location": "/test/#responses_4", 
+            "text": "Expected:     Code  Type      204 No Content      Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     404 Not Found  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#post-projectsidevents", 
+            "text": "For github Webhook callback", 
+            "title": "POST /projects/{id}/events"
+        }, 
+        {
+            "location": "/test/#request-parameters_4", 
+            "text": "Name  Type  Source  Options  Description      id  UUID  path      event  PushEventRequest  body", 
+            "title": "Request parameters:"
+        }, 
+        {
+            "location": "/test/#responses_5", 
+            "text": "Expected:     Code  Type      204 No Content      Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     404 Not Found  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#post-projectsidsync", 
+            "text": "Force Apex to sync with the project data on git.   Please refer to  Sample\nRequest/Responses  sections for examples.", 
+            "title": "POST /projects/{id}/sync"
+        }, 
+        {
+            "location": "/test/#request-parameters_5", 
+            "text": "Name  Type  Source  Options  Description      id  UUID  path", 
+            "title": "Request parameters:"
+        }, 
+        {
+            "location": "/test/#responses_6", 
+            "text": "Expected:     Code  Type      204 No Content      Exception:     Code  Type  Comment      400 Bad Request  ResourceError     401 Unauthorized  ResourceError     404 Not Found  ResourceError     409 Conflict  ResourceError     500 Internal Server Error  ResourceError", 
+            "title": "Responses:"
+        }, 
+        {
+            "location": "/test/#types", 
+            "text": "", 
+            "title": "Types"
+        }, 
+        {
+            "location": "/apex_reserved_swaggerui/", 
+            "text": "Swagger UI\n\n\n\n\ntest", 
+            "title": "Swagger UI"
+        }, 
+        {
+            "location": "/apex_reserved_swaggerui/#swagger-ui", 
+            "text": "test", 
+            "title": "Swagger UI"
+        }, 
+        {
+            "location": "/Foo_1/", 
+            "text": "Foo 1\n\n\nHAHAHA\n\n\nAdd some new line", 
+            "title": "updated Foo 1"
+        }, 
+        {
+            "location": "/Foo_1/#foo-1", 
+            "text": "HAHAHA  Add some new line", 
+            "title": "Foo 1"
+        }, 
+        {
+            "location": "/Foo_3/", 
+            "text": "The 3rd md", 
+            "title": "updated Foo 3"
+        }, 
+        {
+            "location": "/copyright/", 
+            "text": "Copyright\n\n\nBy Buzz @ Yahoo", 
+            "title": "Copyright"
+        }, 
+        {
+            "location": "/copyright/#copyright", 
+            "text": "By Buzz @ Yahoo", 
+            "title": "Copyright"
+        }, 
+        {
+            "location": "/related_links/", 
+            "text": "Related links\n\n\n\n\nTest Host: \nhttps://ccc-api1.cards.ec.tw1.yahoo.com:4443\n\n\nReview Jive Link", 
+            "title": "Outer links"
+        }, 
+        {
+            "location": "/related_links/#related-links", 
+            "text": "Test Host:  https://ccc-api1.cards.ec.tw1.yahoo.com:4443  Review Jive Link", 
+            "title": "Related links"
+        }, 
+        {
+            "location": "/apex_reserved_splunk_dashboard/", 
+            "text": "Splunk Dashboard\n\n\nSplunk dashboard: https://splunkv.nevec.yahoo.com:9999/en-US/app/search/buzz_cobranded_card_api_dashboard", 
+            "title": "Splunk dashboard"
+        }, 
+        {
+            "location": "/apex_reserved_splunk_dashboard/#splunk-dashboard", 
+            "text": "Splunk dashboard: https://splunkv.nevec.yahoo.com:9999/en-US/app/search/buzz_cobranded_card_api_dashboard", 
+            "title": "Splunk Dashboard"
+        }
+    ]
+}

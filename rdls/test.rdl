@@ -1,0 +1,240 @@
+//
+// **APEX API** provides endpoints to onboard, update, delete a project and retrieve project(s) information.
+// It also provides other operations to sync with github or receive github events.
+// <br/> <br/>
+// ***Terminologies*** <br/>
+// * **Project**: A project is an API that is registered with APEX through the onboarding process. <br/>
+//
+namespace com.yahoo.apex.parsec;
+name apex;
+version 1;
+
+
+//
+// DateTime string that follows ISO 8601 UTC format, e.g.2013-03-06T11:00:00Z
+//
+type DateTime String
+
+//
+//The request parameter used in project onboarding/creation and update. <br/><br/>
+//- Each and every field are required for creation (not null), and can not be blank. <br/>
+//- The fields are allowed to be null on update but not blank. If the field value is null for update, the field will be kept unchanged. <br/>
+//- Please refer to  [Sample Request/Responses](#TBD) sections for examples. <br/>
+//- **Implementation note**: Regex is used to verify the input is not blank and escape '\\' twice for rdl & java
+//
+type ProjectRequest struct {
+    //The ssh url to the repository where the RDL source and documents resides. <br/>
+    //Should be in the format of `git@git.corp.yahoo.com:${orgname}/${reponame}.git#${branchName}`
+    String repoUrl      (x_not_null="groups=create", x_size="max=256,groups=create|update", x_pattern="regexp=\"^.*\\\\S.*$\", groups=create|update");
+
+    //The name of the api.
+    String name         (x_not_null="groups=create", x_size="max=256,groups=create|update", x_pattern="regexp=\"^.*\\\\S.*$\", groups=create|update");
+
+    //The custodian/contact of the api, should be a `@yahoo-inc` address. An ilist is preferred.
+    String custodian    (x_not_null="groups=create", x_size="max=256,groups=create|update", x_pattern="regexp=\"^[a-zA-Z0-9._%+-]+@yahoo-inc.com$\", groups=create|update");
+
+    //Long description of the api.
+    String description  (x_not_null="groups=create", x_size="max=512,groups=create|update", x_pattern="regexp=\"^.*\\\\S.*$\", groups=create|update");
+}
+
+//
+// The response object used in GET operation
+//
+type ProjectResponse struct {
+    //System generated unique id.
+    UUID id;
+
+    //The name of the project. As specified on project creation.
+    String name;
+
+    //The custodian of the project. As specified on project creation.
+    String custodian;
+
+    //The description of the project. As specified on project creation.
+    String description;
+
+    //The repository of the project. As specified on project creation.
+    String repoUrl;
+
+    //The organization of the project repository, specified in `repoUrl` on project creation.
+    String repoOrg;
+
+    //The name of the project repository, specified in `repoUrl` on project creation.
+    String repoName;
+
+    //The branch of the project repository, specified in `repoUrl` on project creation.
+    String repoBranch;
+
+    //The sha of the project repository.
+    String repoHeadSha;
+
+    //The url to the document-hosting page, ex: https://git.corp.yahoo.com/pages/ApexHosting/project_cat/
+    String docUrl;
+
+    //The url to the api review jive page, ex: https://yahoo.jiveon.com/thread/17141, as specified in the project config file.
+    String reviewUrl;
+
+    //The url to the api splunk dashboard, as specified in the project config file.
+    String splunkDashboardUrl;
+
+    //The test host url, as specified in the project config file.
+    String testHostUrl;
+    Int64 webHookId;
+
+    //The date time when the project is created.
+    DateTime createdTime;
+
+    //The date time when the project is updated.
+    DateTime updateTime;
+}
+
+//
+// A collection of [ProjectResponse](#projectresponse)
+//
+type ProjectResponseList struct {
+    array<ProjectResponse> projectResponseList;
+}
+
+//
+// Represents response when there is no content.
+//
+type NullResponse struct {
+}
+
+
+//
+// Represents the github webhook payload. Currently we only need these 2 fields. <br/>
+// ref: https://developer.github.com/v3/activity/events/types/#pushevent
+type PushEventRequest struct {
+    String ref;
+    String after;    // the latest SHA
+}
+
+
+//
+// Create/Onboard a project. <br/>
+// Please refer to  [Sample Request/Responses](#TBD) sections for examples.
+//
+resource ProjectResponse POST "/projects/" (name=createProject) {
+    //Required request parameter.
+    ProjectRequest creationRequest (x_must_validate="create");
+
+    authenticate;
+
+    expected ACCEPTED;
+
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError BAD_REQUEST;
+        ResourceError CONFLICT;
+        ResourceError UNAUTHORIZED;
+        ResourceError FORBIDDEN;
+    }
+}
+
+//
+// Edit/Modify a project. <br/>
+// Please refer to  [Sample Request/Responses](#TBD) sections for examples.
+//
+resource ProjectResponse PUT "/projects/{id}" (name=updateProject) {
+    UUID id;
+    ProjectRequest project (x_must_validate="update");
+
+    authenticate;
+
+    expected OK;
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError BAD_REQUEST;
+        ResourceError CONFLICT;
+        ResourceError UNAUTHORIZED;
+        ResourceError FORBIDDEN;
+        ResourceError NOT_FOUND;
+    }
+}
+
+
+//
+// Get the detail of the project with the given project id. <br/>
+// Please refer to [Sample Request/Responses](#TBD) sections for examples.
+//
+resource ProjectResponse GET "/projects/{id}" {
+    UUID id;
+
+    expected OK;
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError BAD_REQUEST;
+        ResourceError UNAUTHORIZED;
+        ResourceError NOT_FOUND;
+    }
+}
+
+//
+// Get all projects. <br/>
+// Please refer to [Sample Request/Responses](#TBD) sections for examples.
+//
+resource ProjectResponseList GET "/projects" {
+    expected OK;
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError BAD_REQUEST;
+        ResourceError UNAUTHORIZED;
+    }
+}
+
+//
+// Delete the project with the given project id. <br/>
+// Please refer to [Sample Request/Responses](#TBD) sections for examples.
+//
+resource NullResponse DELETE "/projects/{id}" (name=deleteProject) {
+    UUID id;
+
+    authenticate;
+
+    expected NO_CONTENT;
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError BAD_REQUEST;
+        ResourceError UNAUTHORIZED;
+        ResourceError NOT_FOUND;
+    }
+}
+
+//
+// For github Webhook callback <br/>
+//
+resource NullResponse POST "/projects/{id}/events" (name=receiveProjectEvent) {
+    UUID id;
+    PushEventRequest event;
+
+    authenticate;
+
+    expected NO_CONTENT;
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError BAD_REQUEST;
+        ResourceError UNAUTHORIZED;
+        ResourceError NOT_FOUND;
+    }
+}
+
+//
+// Force Apex to sync with the project data on git. <br/>
+// Please refer to [Sample Request/Responses](#TBD) sections for examples.
+//
+resource NullResponse POST "/projects/{id}/sync" (name=syncProject) {
+    UUID id;
+
+    authenticate;
+
+    expected NO_CONTENT;
+    exceptions {
+        ResourceError INTERNAL_SERVER_ERROR;
+        ResourceError CONFLICT;
+        ResourceError BAD_REQUEST;
+        ResourceError UNAUTHORIZED;
+        ResourceError NOT_FOUND;
+    }
+
+}
